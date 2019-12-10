@@ -76,7 +76,7 @@ public class CensusAnalyser {
         return sortedStateCensusJson;
     }
 
-    private void sort(Comparator<IndiaCensusDAO> censusComparator) {
+    private void sort(Comparator<IndiaCensusDAO> censusComparator) throws CensusAnalyserException {
         for (int i = 0; i < censusList.size() - 1; i++) {
             for (int j = 0; j < censusList.size() - 1; j++) {
                 IndiaCensusDAO census1 = censusList.get(j);
