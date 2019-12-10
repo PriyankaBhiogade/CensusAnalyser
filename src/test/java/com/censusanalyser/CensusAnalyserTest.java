@@ -10,6 +10,11 @@ public class CensusAnalyserTest {
     private static final String INDIA_CENSUS_CSV_FILE_PATH = "./src/test/resources/IndiaStateCensusData.csv";
     private static final String WRONG_CSV_FILE_PATH = "./src/main/resources/IndiaStateCensusData.csv";
     private static final String INDIA_STATE_CODE_CSV_FILE_PATH = "./src/test/resources/IndiaStateCode.csv";
+    private static final String EMPTY_FILE_PATH = "./src/test/resources/EmptyFile.csv";
+    private static final String DELIMITER_FILE_PATH = "./src/test/resources/DelimiterWrong.csv";
+    private static final String HEADER_FILE_PATH = "./src/test/resources/HeaderMissing.csv";
+
+
 
     @Test
     public void givenIndiaStateCodeData_ShouldReturnExactCount() {
@@ -151,7 +156,6 @@ public class CensusAnalyserTest {
         }
     }
 
-
     @Test
     public void givenIndiaCensusData_WhenSortedOnState_ShouldReturnSortedResult() {
         try {
@@ -161,6 +165,27 @@ public class CensusAnalyserTest {
             IndiaCensusCSV[] censusCSV = new Gson().fromJson(sortedCensusData, IndiaCensusCSV[].class);
             Assert.assertEquals("Andhra Pradesh", censusCSV[0].state);
         } catch (CensusAnalyserException e) {
+        }
+    }
+
+    @Test
+    public void givenIndiaCensusData_WhenFilePathIsEmpty_ShouldReturnSortedResult() {
+        try {
+            CensusAnalyser censusAnalyser = new CensusAnalyser();
+            censusAnalyser.loadIndiaCensusData(EMPTY_FILE_PATH);
+        } catch (CensusAnalyserException e) {
+            Assert.assertEquals(CensusAnalyserException.ExceptionType.SOME_FILE_ISSUE, e.type);
+        }
+    }
+
+    @Test
+    public void givenIndiaCensusData_WhenFileIsEmpty_ShouldReturnSortedResult() {
+        try {
+            CensusAnalyser censusAnalyser = new CensusAnalyser();
+            String sortedCensusData = censusAnalyser.getStateWiseSortedCensusData();
+            new Gson().fromJson(sortedCensusData, IndiaCensusCSV[].class);
+        } catch (CensusAnalyserException e) {
+            Assert.assertEquals(CensusAnalyserException.ExceptionType.NO_CENSUS_DATA, e.type);
         }
     }
 }
