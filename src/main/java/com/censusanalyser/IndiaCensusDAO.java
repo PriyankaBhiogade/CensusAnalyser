@@ -1,4 +1,4 @@
-package censusanalyser;
+package com.censusanalyser;
 
 public class IndiaCensusDAO {
     public String state;

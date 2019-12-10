@@ -1,4 +1,4 @@
-package censusanalyser;
+package com.censusanalyser;
 
 import com.google.gson.Gson;
 import org.junit.Assert;
@@ -10,7 +10,6 @@ public class CensusAnalyserTest {
     private static final String INDIA_CENSUS_CSV_FILE_PATH = "./src/test/resources/IndiaStateCensusData.csv";
     private static final String WRONG_CSV_FILE_PATH = "./src/main/resources/IndiaStateCensusData.csv";
     private static final String INDIA_STATE_CODE_CSV_FILE_PATH = "./src/test/resources/IndiaStateCode.csv";
-    private static final String INDIA_CENSUS_JSON_FILE_PATH = "./src/test/resources/IndiaStateCode.json";
 
     @Test
     public void givenIndianCensusCSVFileReturnsCorrectRecords() {
@@ -52,8 +51,6 @@ public class CensusAnalyserTest {
             String sortedCensusData = censusAnalyser.getStateWiseSortedCensusData();
             IndiaCensusCSV[] censusCSV = new Gson().fromJson(sortedCensusData, IndiaCensusCSV[].class);
             Assert.assertEquals("Andhra Pradesh", censusCSV[0].state);
-        } catch (CensusAnalyserException e) {
-            e.printStackTrace();
-        }
+        } catch (CensusAnalyserException e) { }
     }
 }
