@@ -14,6 +14,7 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.StreamSupport;
+import java.util.zip.DataFormatException;
 
 public class CensusAnalyser {
 
@@ -49,9 +50,9 @@ public class CensusAnalyser {
                     CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
         } catch (CSVBuilderException e) {
             throw new CensusAnalyserException(e.getMessage(), e.type.name());
-        } catch (RuntimeException e) {
+        } catch (RuntimeException e){
             throw new CensusAnalyserException(e.getMessage(),
-                    CensusAnalyserException.ExceptionType.NO_SUCH_TYPE);
+                    CensusAnalyserException.ExceptionType.SOME_FILE_ISSUE);
         }
     }
 
