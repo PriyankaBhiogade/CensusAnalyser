@@ -1,9 +1,10 @@
 package com.censusanalyser;
 
+
 import com.google.gson.Gson;
-import com.opencsvbuilder.CSVBuilderException;
-import com.opencsvbuilder.CSVBuilderFactory;
-import com.opencsvbuilder.ICSVBuilder;
+import opencsvbuilder.CSVBuilderException;
+import opencsvbuilder.CSVBuilderFactory;
+import opencsvbuilder.ICSVBuilder;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -33,7 +34,8 @@ public class CensusAnalyser {
             throw new CensusAnalyserException(e.getMessage(),
                     CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
         } catch (CSVBuilderException e) {
-            throw new CensusAnalyserException(e.getMessage(), e.type.name());
+            throw new CensusAnalyserException(e.getMessage(),
+                    CensusAnalyserException.ExceptionType.ERROR_FROM_CSV_BUILDER);
         } catch (RuntimeException e) {
             throw new CensusAnalyserException(e.getMessage(),
                     CensusAnalyserException.ExceptionType.SOME_FILE_ISSUE);
@@ -57,7 +59,8 @@ public class CensusAnalyser {
             throw new CensusAnalyserException(e.getMessage(),
                     CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
         } catch (CSVBuilderException e) {
-            throw new CensusAnalyserException(e.getMessage(), e.type.name());
+            throw new CensusAnalyserException(e.getMessage(),
+                    CensusAnalyserException.ExceptionType.ERROR_FROM_CSV_BUILDER);
         } catch (RuntimeException e) {
             throw new CensusAnalyserException(e.getMessage(),
                     CensusAnalyserException.ExceptionType.SOME_FILE_ISSUE);

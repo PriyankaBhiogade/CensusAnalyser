@@ -8,12 +8,4 @@ public class IndiaStateCodeCsv {
 
     @CsvBindByName(column = "StateCode", required = true)
     public String stateCode;
-
-    @Override
-    public String toString() {
-        return "IndiaStateCodeCsv{" +
-                "state='" + state + '\'' +
-                ", stateCode='" + stateCode + '\'' +
-                '}';
-    }
 }
