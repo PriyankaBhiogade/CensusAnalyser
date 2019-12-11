@@ -28,9 +28,9 @@ public class CensusAnalyser {
         try (Reader reader = Files.newBufferedReader(Paths.get(csvFilePath));) {
             ICSVBuilder csvBuilder = CSVBuilderFactory.createCSVBuilder();
             Iterator<IndiaCensusCSV> csvFileIterator = csvBuilder.getCsvFileIterator(reader, IndiaCensusCSV.class);
-            while (csvFileIterator.hasNext()) {
-                this.censusList.add(new IndiaCensusDAO(csvFileIterator.next()));
-            }
+            Iterable<IndiaCensusCSV> csvIterable = () -> csvFileIterator;
+            StreamSupport.stream(csvIterable.spliterator(), false)
+                    .forEach(censusCSV -> censusList.add(new IndiaCensusDAO(censusCSV)));
             return this.censusList.size();
         } catch (IOException e) {
             throw new CensusAnalyserException(e.getMessage(),
@@ -99,5 +99,4 @@ public class CensusAnalyser {
         String sortedStateCensusJson = new Gson().toJson(this.censusList);
         return sortedStateCensusJson;
     }
-
 }

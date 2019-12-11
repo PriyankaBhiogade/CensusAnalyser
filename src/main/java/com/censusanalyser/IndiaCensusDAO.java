@@ -1,6 +1,7 @@
 package com.censusanalyser;
 
 public class IndiaCensusDAO {
+    public String stateCode;
     public String state;
     public int areaInSqKm;
     public int densityPerSqKm;
