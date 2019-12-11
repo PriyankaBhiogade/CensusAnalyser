@@ -3,7 +3,7 @@ package com.censusanalyser;
 import com.google.gson.Gson;
 import com.opencsvbuilder.CSVBuilderException;
 import com.opencsvbuilder.CSVBuilderFactory;
-import com.opencsvbuilder.ICSVBuilder;;
+import com.opencsvbuilder.ICSVBuilder;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -50,7 +50,7 @@ public class CensusAnalyser {
                 counter++;
                 IndiaCensusDAO censusDAO = censusStateMap.get(stateCSV.state);
                 if (censusDAO == null) continue;
-                censusDAO.stateCode = stateCSV.stateCode;
+                censusDAO.StateCode = stateCSV.stateCode;
             }
             return counter;
         } catch (IOException e) {
@@ -65,11 +65,25 @@ public class CensusAnalyser {
     }
 
     public String getStateWiseSortedCensusData() throws CensusAnalyserException {
+        this.checkValue();
+        Comparator<IndiaCensusDAO> censusComparator = Comparator.comparing(census -> census.state);
+        return this.getSort(censusComparator);
+    }
+
+    public String getPopulationWiseSortedCensusData() throws CensusAnalyserException {
+        this.checkValue();
+        Comparator<IndiaCensusDAO> sortedPopulationCensusJson = Comparator.comparing(census -> census.population, Comparator.reverseOrder());
+        return this.getSort(sortedPopulationCensusJson);
+    }
+
+    private void checkValue() throws CensusAnalyserException {
         if (censusStateMap == null || censusStateMap.size() == 0) {
             throw new CensusAnalyserException("No Census Data",
                     CensusAnalyserException.ExceptionType.NO_CENSUS_DATA);
         }
-        Comparator<IndiaCensusDAO> censusComparator = Comparator.comparing(census -> census.state);
+    }
+
+    private String getSort(Comparator<IndiaCensusDAO> censusComparator) {
         List<IndiaCensusDAO> censusDAOS = censusStateMap.values().
                 stream().collect(Collectors.toList());
         this.sort(censusDAOS, censusComparator);
@@ -88,18 +102,5 @@ public class CensusAnalyser {
                 }
             }
         }
-    }
-
-    public String getPopulationWiseSortedCensusData() throws CensusAnalyserException {
-        if (censusStateMap == null || censusStateMap.size() == 0) {
-            throw new CensusAnalyserException("No Census Data",
-                    CensusAnalyserException.ExceptionType.NO_CENSUS_DATA);
-        }
-        Comparator<IndiaCensusDAO> censusComparator = Comparator.comparing(census -> census.population,Comparator.reverseOrder());
-        List<IndiaCensusDAO> censusDAOS = censusStateMap.values().
-                stream().collect(Collectors.toList());
-        this.sort(censusDAOS, censusComparator);
-        String sortedStateCensusJson = new Gson().toJson(censusDAOS);
-        return sortedStateCensusJson;
     }
 }

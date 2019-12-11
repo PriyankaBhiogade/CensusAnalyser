@@ -168,7 +168,7 @@ public class CensusAnalyserTest {
     }
 
     @Test
-    public void givenIndiaCensusData_WhenFilePathIsEmpty_ShouldReturnSortedResult() {
+    public void givenIndiaCensusData_WhenFilePathIsEmpty_ShouldReturnException() {
         try {
             CensusAnalyser censusAnalyser = new CensusAnalyser();
             censusAnalyser.loadIndiaCensusData(EMPTY_FILE_PATH);
@@ -178,7 +178,7 @@ public class CensusAnalyserTest {
     }
 
     @Test
-    public void givenIndiaCensusData_WhenFileIsEmpty_ShouldReturnSortedResult() {
+    public void givenIndiaCensusData_WhenFileIsEmpty_ShouldReturnException() {
         try {
             CensusAnalyser censusAnalyser = new CensusAnalyser();
             String sortedCensusData = censusAnalyser.getStateWiseSortedCensusData();
@@ -189,7 +189,7 @@ public class CensusAnalyserTest {
     }
 
     @Test
-    public void givenIndiaCensusData_WhenSortedOnPopulation_ShouldReturnSortedResult() {
+    public void givenIndiaCensusData_WhenSortedByPopulation_ShouldReturnSortedResult() {
         try {
             CensusAnalyser censusAnalyser = new CensusAnalyser();
             censusAnalyser.loadIndiaCensusData(INDIA_CENSUS_CSV_FILE_PATH);
