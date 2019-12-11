@@ -37,7 +37,7 @@ public class CensusAnalyser {
                     CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
         } catch (CSVBuilderException e) {
             throw new CensusAnalyserException(e.getMessage(), e.type.name());
-        }catch (RuntimeException e){
+        } catch (RuntimeException e) {
             throw new CensusAnalyserException(e.getMessage(),
                     CensusAnalyserException.ExceptionType.SOME_FILE_ISSUE);
         }
@@ -53,7 +53,7 @@ public class CensusAnalyser {
                     CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
         } catch (CSVBuilderException e) {
             throw new CensusAnalyserException(e.getMessage(), e.type.name());
-        } catch (RuntimeException e){
+        } catch (RuntimeException e) {
             throw new CensusAnalyserException(e.getMessage(),
                     CensusAnalyserException.ExceptionType.SOME_FILE_ISSUE);
         }
@@ -76,7 +76,7 @@ public class CensusAnalyser {
         return sortedStateCensusJson;
     }
 
-    private void sort(Comparator<IndiaCensusDAO> censusComparator) throws CensusAnalyserException {
+    private void sort(Comparator<IndiaCensusDAO> censusComparator) {
         for (int i = 0; i < censusList.size() - 1; i++) {
             for (int j = 0; j < censusList.size() - 1; j++) {
                 IndiaCensusDAO census1 = censusList.get(j);
@@ -88,4 +88,16 @@ public class CensusAnalyser {
             }
         }
     }
+
+    public String getPopulationWiseSortedCensusData() throws CensusAnalyserException {
+        if (censusList == null || censusList.size() == 0) {
+            throw new CensusAnalyserException("No Census Data",
+                    CensusAnalyserException.ExceptionType.NO_CENSUS_DATA);
+        }
+        Comparator<IndiaCensusDAO> censusComparator = Comparator.comparing(census -> census.population);
+        this.sort(censusComparator);
+        String sortedStateCensusJson = new Gson().toJson(this.censusList);
+        return sortedStateCensusJson;
+    }
+
 }
