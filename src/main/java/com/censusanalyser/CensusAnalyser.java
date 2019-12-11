@@ -64,12 +64,6 @@ public class CensusAnalyser {
         }
     }
 
-    private <E> int getCount(Iterator<E> csvIterator) {
-        Iterable<E> csvIterable = () -> csvIterator;
-        int numOfEnteries = (int) StreamSupport.stream(csvIterable.spliterator(), false).count();
-        return numOfEnteries;
-    }
-
     public String getStateWiseSortedCensusData() throws CensusAnalyserException {
         if (censusStateMap == null || censusStateMap.size() == 0) {
             throw new CensusAnalyserException("No Census Data",
@@ -97,11 +91,11 @@ public class CensusAnalyser {
     }
 
     public String getPopulationWiseSortedCensusData() throws CensusAnalyserException {
-     if (censusStateMap == null || censusStateMap.size() == 0) {
+        if (censusStateMap == null || censusStateMap.size() == 0) {
             throw new CensusAnalyserException("No Census Data",
                     CensusAnalyserException.ExceptionType.NO_CENSUS_DATA);
         }
-        Comparator<IndiaCensusDAO> censusComparator = Comparator.comparing(census -> census.population);
+        Comparator<IndiaCensusDAO> censusComparator = Comparator.comparing(census -> census.population,Comparator.reverseOrder());
         List<IndiaCensusDAO> censusDAOS = censusStateMap.values().
                 stream().collect(Collectors.toList());
         this.sort(censusDAOS, censusComparator);
