@@ -79,6 +79,12 @@ public class CensusAnalyser {
         return this.getSort(sortedPopulationCensusJson);
     }
 
+    public String getAreaWiseSortedCensusData() throws CensusAnalyserException {
+        this.checkValue();
+        Comparator<IndiaCensusDAO> sortedPopulationCensusJson = Comparator.comparing(census -> census.areaInSqKm, Comparator.reverseOrder());
+        return this.getSort(sortedPopulationCensusJson);
+    }
+
     private void checkValue() throws CensusAnalyserException {
         if (censusStateMap == null || censusStateMap.size() == 0) {
             throw new CensusAnalyserException("No Census Data",
