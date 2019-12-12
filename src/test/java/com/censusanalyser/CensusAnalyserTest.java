@@ -13,6 +13,7 @@ public class CensusAnalyserTest {
     private static final String EMPTY_FILE_PATH = "./src/test/resources/EmptyFile.csv";
     private static final String DELIMITER_FILE_PATH = "./src/test/resources/DelimiterWrong.csv";
     private static final String HEADER_FILE_PATH = "./src/test/resources/HeaderMissing.csv";
+    private static final String US_CENSUS_FILE_PATH ="/home/admin1/Desktop/CensusAnalyser/CensusAnalyser/src/test/resources/USCensusData.csv";
 
     @Test
     public void givenIndiaStateCodeData_ShouldReturnExactCount() {
@@ -153,7 +154,7 @@ public class CensusAnalyserTest {
             exceptionRule.expect(CensusAnalyserException.class);
             censusAnalyser.loadIndiaCensusData(DELIMITER_FILE_PATH);
         } catch (CensusAnalyserException e) {
-            Assert.assertEquals(CensusAnalyserException.ExceptionType.SOME_FILE_ISSUE, e.type);
+            Assert.assertEquals(CensusAnalyserException.ExceptionType.ERROR_FROM_CSV_BUILDER, e.type);
         }
     }
 
@@ -252,5 +253,13 @@ public class CensusAnalyserTest {
             Assert.assertEquals("Bihar", censusCSV[0].state);
         } catch (CensusAnalyserException e) {
         }
+    }
+
+    @Test
+    public void givenUSCensusData_ShouldReturnCorrectData() throws CensusAnalyserException {
+        CensusAnalyser censusAnalyser = new CensusAnalyser();
+        int count = censusAnalyser.loadUSCensusData(US_CENSUS_FILE_PATH);
+        Assert.assertEquals(51,count);
+
     }
 }
