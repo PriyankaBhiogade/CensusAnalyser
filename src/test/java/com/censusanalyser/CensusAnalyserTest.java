@@ -260,6 +260,6 @@ public class CensusAnalyserTest {
         CensusAnalyser censusAnalyser = new CensusAnalyser();
         int count = censusAnalyser.loadUSCensusData(US_CENSUS_FILE_PATH);
         Assert.assertEquals(51,count);
-
     }
+
 }
