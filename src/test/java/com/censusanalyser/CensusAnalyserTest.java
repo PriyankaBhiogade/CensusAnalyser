@@ -240,17 +240,6 @@ public class CensusAnalyserTest {
     }
 
     @Test
-    public void givenIndiaCensusData_WhenSortedByAreaButFileIsEmpty_ShouldReturnException() {
-        try {
-            CensusAnalyser censusAnalyser = new CensusAnalyser();
-            String sortedCensusData = censusAnalyser.getAreaWiseSortedCensusData();
-            new Gson().fromJson(sortedCensusData, IndiaCensusCSV[].class);
-        } catch (CensusAnalyserException e) {
-            Assert.assertEquals(CensusAnalyserException.ExceptionType.NO_CENSUS_DATA, e.type);
-        }
-    }
-
-    @Test
     public void givenIndiaCensusData_WhenSortedByDensity_ShouldReturnSortedResult() {
         try {
             CensusAnalyser censusAnalyser = new CensusAnalyser();
