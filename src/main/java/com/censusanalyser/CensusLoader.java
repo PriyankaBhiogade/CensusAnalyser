@@ -34,7 +34,7 @@ public class CensusLoader {
                 StreamSupport.stream(csvIterable.spliterator(), false)
                         .map(USCensusCode.class::cast)
                         .forEach(censusCSV -> censusStateMap.put(censusCSV.state, new CensusDAO(censusCSV)));
-            } else if (censusCSVClass.isInstance(IndiaCensusCSV.class)) {
+            } else if (censusCSVClass.getName().equals("com.censusanalyser.IndiaCensusCSV")) {
                 StreamSupport.stream(csvIterable.spliterator(), false)
                         .map(IndiaCensusCSV.class::cast)
                         .forEach(censusCSV -> censusStateMap.put(censusCSV.state, new CensusDAO(censusCSV)));
