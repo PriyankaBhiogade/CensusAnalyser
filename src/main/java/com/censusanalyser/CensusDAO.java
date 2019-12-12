@@ -1,17 +1,29 @@
 package com.censusanalyser;
 
-public class IndiaCensusDAO {
+public class CensusDAO {
     public String state;
     public String stateCode;
-    public int areaInSqKm;
-    public int densityPerSqKm;
     public int population;
+    public double populationDensity;
+    public double totalArea;
 
 
-    public IndiaCensusDAO(IndiaCensusCSV indiaCensusCSV) {
+    public CensusDAO(IndiaCensusCSV indiaCensusCSV) {
         state = indiaCensusCSV.state;
-        areaInSqKm = indiaCensusCSV.areaInSqKm;
-        densityPerSqKm = indiaCensusCSV.densityPerSqKm;
+        totalArea = indiaCensusCSV.areaInSqKm;
+        populationDensity = indiaCensusCSV.densityPerSqKm;
         population = indiaCensusCSV.population;
+    }
+
+    public CensusDAO(USCensusCode usCensusCSv) {
+        state = usCensusCSv.state;
+        stateCode = usCensusCSv.stateId;
+        totalArea = usCensusCSv.totalArea;
+        populationDensity = usCensusCSv.populationDensity;
+        population = usCensusCSv.population;
+    }
+
+    public IndiaCensusCSV getIndiaCensusCSV() {
+        return new IndiaCensusCSV(state,population,(int)populationDensity,(int)totalArea);
     }
 }
