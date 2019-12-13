@@ -19,5 +19,14 @@ public class USCensusCode {
     @CsvBindByName(column = "Population Density", required = true)
     public double populationDensity;
 
+    public USCensusCode() {
+    }
 
+    public USCensusCode(String state, String stateCode, int population, double populationDensity, double totalArea) {
+        this.state = state;
+        this.stateId = stateCode;
+        this.population = population;
+        this.totalArea = totalArea;
+        this.populationDensity =populationDensity;
+    }
 }

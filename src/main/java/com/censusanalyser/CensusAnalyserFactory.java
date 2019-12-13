@@ -1,6 +1,5 @@
 package com.censusanalyser;
 
-
 public class CensusAnalyserFactory {
 
     public static CensusAdapter getCountry(CensusAnalyser.Country country, String... csvFilePath) throws CensusAnalyserException {
