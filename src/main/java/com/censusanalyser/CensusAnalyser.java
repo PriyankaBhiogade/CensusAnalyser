@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 public class CensusAnalyser {
     enum Country {
-        INDIA, US
+        INDIA, US,UK
     }
 
     Map<String, CensusDAO> censusStateMap = null;

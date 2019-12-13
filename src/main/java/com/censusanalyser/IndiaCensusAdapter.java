@@ -17,14 +17,15 @@ public class IndiaCensusAdapter extends CensusAdapter {
     @Override
     public Map<String, CensusDAO> loadCensusData(String... csvFilePath) throws CensusAnalyserException {
         Map<String, CensusDAO> censusStateMap = super.loadCensusData(IndiaCensusCSV.class,csvFilePath[0]);
-        if(csvFilePath.length > 1) {
+        try {
             this.loadIndiaStateCode(censusStateMap, csvFilePath[1]);
+        }catch (ArrayIndexOutOfBoundsException e){
+            throw new CensusAnalyserException("Second File is Wrong",CensusAnalyserException.ExceptionType.SECOND_FILE_PATH_MISSING);
         }
         return censusStateMap;
     }
 
     private void loadIndiaStateCode(Map<String, CensusDAO> censusStateMap, String... csvFilePath) throws CensusAnalyserException {
-        int counter = 0;
         try (Reader reader = Files.newBufferedReader(Paths.get(csvFilePath[0]));) {
             ICSVBuilder csvBuilder = CSVBuilderFactory.createCSVBuilder();
             Iterator<IndiaStateCodeCsv> stateCsvIterator = csvBuilder.getCsvFileIterator(reader, IndiaStateCodeCsv.class);

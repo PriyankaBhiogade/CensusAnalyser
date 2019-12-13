@@ -1,6 +1,5 @@
 package com.censusanalyser;
 
-import java.util.Map;
 
 public class CensusAnalyserFactory {
 
