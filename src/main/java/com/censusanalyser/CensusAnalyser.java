@@ -1,23 +1,23 @@
 package com.censusanalyser;
 
 import com.google.gson.Gson;
-import opencsvbuilder.CSVBuilderException;
-import opencsvbuilder.CSVBuilderFactory;
-import opencsvbuilder.ICSVBuilder;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class CensusAnalyser {
-    enum Country{
-        India,US
+    enum Country {
+        INDIA, US
     }
+
     Map<String, CensusDAO> censusStateMap = null;
 
     public CensusAnalyser() {
     }
+
     public int loadCensusData(Country country, String... csvFilePath) throws CensusAnalyserException {
-        censusStateMap = new CensusLoader().loadCensusData(country,csvFilePath);
+        CensusAdapter censusAdapter = CensusAnalyserFactory.getCountry(country);
+        censusStateMap = censusAdapter.loadCensusData(csvFilePath);
         return censusStateMap.size();
     }
 
