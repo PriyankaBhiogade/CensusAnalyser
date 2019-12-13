@@ -11,7 +11,7 @@ public class USAdapterTest {
     private static final String INDIA_CENSUS_CSV_FILE_PATH = "./src/test/resources/IndiaStateCensusData.csv";
     private static final String INDIA_STATE_CODE_CSV_FILE_PATH = "./src/test/resources/IndiaStateCode.csv";
     private static final String WRONG_CSV_FILE_PATH = "./src/main/resources/IndiaStateCensusData123.csv";
-    private static final String DELIMITER_FILE_PATH ="./src/test/resources/USCensusDataDelimterMissing.csv";
+    private static final String DELIMITER_FILE_PATH = "./src/test/resources/USCensusDataDelimterMissing.csv";
     private static final String HEADER_FILE_PATH = "./src/test/resources/USCensusDataHeaderMissing.csv";
     private static final String EMPTY_FILE_PATH = "./src/test/resources/EmptyFile.csv";
 
@@ -19,14 +19,14 @@ public class USAdapterTest {
     public void givenUSCensusData_WhenCorrect_ShouldReturnMapOfRecordCount() throws CensusAnalyserException {
         USCensusAdapter usCensusAdapter = new USCensusAdapter();
         Map<String, CensusDAO> stringCensusDAOMap = usCensusAdapter.loadCensusData(US_CENSUS_FILE_PATH);
-        Assert.assertEquals(51,stringCensusDAOMap.size());
+        Assert.assertEquals(51, stringCensusDAOMap.size());
     }
 
     @Test
-    public void givenUSCensusDataAndIndiaCensusData_WhenCorrect_ShouldReturnMapOfRecordCount() throws CensusAnalyserException {
+    public void givenUSCensusDataAndIndiaCensusData_WhenUSCensusIsCorrect_ShouldReturnMapOfRecordCount() throws CensusAnalyserException {
         USCensusAdapter usCensusAdapter = new USCensusAdapter();
-        Map<String, CensusDAO> stringCensusDAOMap = usCensusAdapter.loadCensusData(US_CENSUS_FILE_PATH,INDIA_CENSUS_CSV_FILE_PATH);
-        Assert.assertEquals(51,stringCensusDAOMap.size());
+        Map<String, CensusDAO> stringCensusDAOMap = usCensusAdapter.loadCensusData(US_CENSUS_FILE_PATH, INDIA_CENSUS_CSV_FILE_PATH);
+        Assert.assertEquals(51, stringCensusDAOMap.size());
     }
 
     @Test
@@ -38,6 +38,7 @@ public class USAdapterTest {
             Assert.assertEquals(CensusAnalyserException.ExceptionType.ERROR_FROM_CSV_BUILDER, e.type);
         }
     }
+
     @Test
     public void givenUSCensusData_WithWrongFile_ShouldThrowException() {
         try {
@@ -97,5 +98,4 @@ public class USAdapterTest {
             Assert.assertEquals(CensusAnalyserException.ExceptionType.ERROR_FROM_CSV_BUILDER, e.type);
         }
     }
-
 }

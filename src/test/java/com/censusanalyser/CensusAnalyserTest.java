@@ -13,6 +13,7 @@ public class CensusAnalyserTest {
     private static final String INDIA_CENSUS_CSV_FILE_PATH_WITH_MISSING_HEADER = "./src/test/resources/IndiaHeaderMissing.csv";
     private static final String US_CENSUS_FILE_PATH = "./src/test/resources/USCensusData.csv";
     private static final String EMPTY_FILE_PATH = "./src/test/resources/EmptyFile.csv";
+    private static final String INDIA_CENSUS_CSV_FILE_PATH_WITH_COMMON_FIELD = "./src/test/resources/IndiaStateCensusDataCombination.csv";
 
     @Test
     public void givenIndiaCensusDataAndIndiaStateCodeData_WhenSortedOnState_ShouldReturnSortedResult() {
@@ -277,6 +278,30 @@ public class CensusAnalyserTest {
             censusAnalyser.loadCensusData(CensusAnalyser.Country.UK,INDIA_CENSUS_CSV_FILE_PATH, EMPTY_FILE_PATH);
         } catch (CensusAnalyserException e) {
             Assert.assertEquals(CensusAnalyserException.ExceptionType.INVALID_COUNTRY, e.type);
+        }
+    }
+
+    @Test
+    public void givenIndiaCensusDataAndIndiaStateCodeData_WhenSortedByPopulationAndDensity_ShouldReturnSortedResult() {
+        try {
+            CensusAnalyser censusAnalyser = new CensusAnalyser();
+            censusAnalyser.loadCensusData(CensusAnalyser.Country.INDIA, INDIA_CENSUS_CSV_FILE_PATH_WITH_COMMON_FIELD, INDIA_STATE_CODE_CSV_FILE_PATH);
+            String sortedCensusData = censusAnalyser.getSortData(CensusAnalyser.CountryFields.POPULATION_THEN_DENSITY);
+            IndiaCensusCSV[] censusCSV = new Gson().fromJson(sortedCensusData, IndiaCensusCSV[].class);
+            Assert.assertEquals("Chattisgarh", censusCSV[0].state);
+        } catch (CensusAnalyserException e) {
+        }
+    }
+
+    @Test
+    public void givenUSCensusData_WhenSortedByPopulationAndDensity_ShouldReturnSortedResult() {
+        try {
+            CensusAnalyser censusAnalyser = new CensusAnalyser();
+            censusAnalyser.loadCensusData(CensusAnalyser.Country.US,US_CENSUS_FILE_PATH );
+            String sortedCensusData = censusAnalyser.getSortData(CensusAnalyser.CountryFields.POPULATION_THEN_DENSITY);
+            IndiaCensusCSV[] censusCSV = new Gson().fromJson(sortedCensusData, IndiaCensusCSV[].class);
+            Assert.assertEquals("California", censusCSV[0].state);
+        } catch (CensusAnalyserException e) {
         }
     }
 }
