@@ -12,7 +12,7 @@ public class CensusAnalyser {
     }
 
     enum CountryFields {
-        STATE, POPULATION, TOTAL_AREA, POPULATION_DENSITY,POPULATION_THEN_DENSITY
+        STATE, POPULATION, TOTAL_AREA, POPULATION_DENSITY, POPULATION_THEN_DENSITY
     }
 
     private Country country;
@@ -25,8 +25,8 @@ public class CensusAnalyser {
         this.sortBy.put(CountryFields.POPULATION, Comparator.comparing(census -> census.population, Comparator.reverseOrder()));
         this.sortBy.put(CountryFields.TOTAL_AREA, Comparator.comparing(census -> census.totalArea, Comparator.reverseOrder()));
         this.sortBy.put(CountryFields.POPULATION_DENSITY, Comparator.comparing(census -> census.populationDensity, Comparator.reverseOrder()));
-        Comparator<CensusDAO> comp = Comparator.comparing(censusDAO -> censusDAO.population,Comparator.reverseOrder());
-        this.sortBy.put(CountryFields.POPULATION_THEN_DENSITY, comp.thenComparing(censusDAO -> censusDAO.populationDensity,Comparator.reverseOrder()));
+        Comparator<CensusDAO> comp = Comparator.comparing(censusDAO -> censusDAO.population, Comparator.reverseOrder());
+        this.sortBy.put(CountryFields.POPULATION_THEN_DENSITY, comp.thenComparing(censusDAO -> censusDAO.populationDensity, Comparator.reverseOrder()));
     }
 
     public int loadCensusData(Country country, String... csvFilePath) throws CensusAnalyserException {
@@ -41,11 +41,11 @@ public class CensusAnalyser {
             throw new CensusAnalyserException("No Census Data",
                     CensusAnalyserException.ExceptionType.NO_CENSUS_DATA);
         }
-            ArrayList censusDTOS = censusStateMap.values().stream()
-                            .sorted(sortBy.get(field))
-                            .map(censusDAO -> censusDAO.getCensusDTO(country))
-                            .collect(toCollection(ArrayList::new));
-            String sortedStateCensusJson = new Gson().toJson(censusDTOS);
-            return sortedStateCensusJson;
-        }
+        ArrayList censusDTOS = censusStateMap.values().stream()
+                .sorted(sortBy.get(field))
+                .map(censusDAO -> censusDAO.getCensusDTO(country))
+                .collect(toCollection(ArrayList::new));
+        String sortedStateCensusJson = new Gson().toJson(censusDTOS);
+        return sortedStateCensusJson;
+    }
 }

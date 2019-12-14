@@ -27,6 +27,6 @@ public class USCensusCode {
         this.stateId = stateCode;
         this.population = population;
         this.totalArea = totalArea;
-        this.populationDensity =populationDensity;
+        this.populationDensity = populationDensity;
     }
 }

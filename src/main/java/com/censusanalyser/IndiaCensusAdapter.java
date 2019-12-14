@@ -16,11 +16,11 @@ public class IndiaCensusAdapter extends CensusAdapter {
 
     @Override
     public Map<String, CensusDAO> loadCensusData(String... csvFilePath) throws CensusAnalyserException {
-        Map<String, CensusDAO> censusStateMap = super.loadCensusData(IndiaCensusCSV.class,csvFilePath[0]);
+        Map<String, CensusDAO> censusStateMap = super.loadCensusData(IndiaCensusCSV.class, csvFilePath[0]);
         try {
             this.loadIndiaStateCode(censusStateMap, csvFilePath[1]);
-        }catch (ArrayIndexOutOfBoundsException e){
-            throw new CensusAnalyserException("Second File is Wrong",CensusAnalyserException.ExceptionType.SECOND_FILE_PATH_MISSING);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new CensusAnalyserException("Second File is Wrong", CensusAnalyserException.ExceptionType.SECOND_FILE_PATH_MISSING);
         }
         return censusStateMap;
     }

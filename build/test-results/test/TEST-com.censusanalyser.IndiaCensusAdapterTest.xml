@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.censusanalyser.IndiaCensusAdapterTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2019-12-14T03:44:39" hostname="admin1-desktop" time="0.434">
+  <properties/>
+  <testcase name="givenIndianCensusData_ShouldReturnMapOfCorrectRecord" classname="com.censusanalyser.IndiaCensusAdapterTest" time="0.2"/>
+  <testcase name="givenIndiaCensusData_WhenFileEmpty_ShouldThrowException" classname="com.censusanalyser.IndiaCensusAdapterTest" time="0.005"/>
+  <testcase name="givenIndianCensusDataAndStateCodeData_WhenCorrectFile_ShouldReturnMapOfCorrectRecord" classname="com.censusanalyser.IndiaCensusAdapterTest" time="0.126"/>
+  <testcase name="givenIndianCensusDataAndStateCodeData_WhenSequenceWrong_ShouldThrowException" classname="com.censusanalyser.IndiaCensusAdapterTest" time="0.01"/>
+  <testcase name="givenIndiaCensusData_WithIncorrectHeader_ShouldThrowException" classname="com.censusanalyser.IndiaCensusAdapterTest" time="0.006"/>
+  <testcase name="givenIndiaCensusData_WithWrongFileType_ShouldThrowException" classname="com.censusanalyser.IndiaCensusAdapterTest" time="0.001"/>
+  <testcase name="givenIndiaCensusData_WithIncorrectDelimiter_ShouldThrowException" classname="com.censusanalyser.IndiaCensusAdapterTest" time="0.01"/>
+  <testcase name="givenIndiaCensusData_WithWrongFile_ShouldThrowException" classname="com.censusanalyser.IndiaCensusAdapterTest" time="0.0"/>
+  <testcase name="givenIndianCensusDataAndUSCensusData_WhenSecondFileIsWrong_ShouldThrowException" classname="com.censusanalyser.IndiaCensusAdapterTest" time="0.073"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

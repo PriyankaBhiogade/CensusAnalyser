@@ -18,7 +18,7 @@ public class IndiaCensusAdapterTest {
     @Test
     public void givenIndianCensusDataAndStateCodeData_WhenCorrectFile_ShouldReturnMapOfCorrectRecord() throws CensusAnalyserException {
         IndiaCensusAdapter indiaCensusAdapter = new IndiaCensusAdapter();
-        Map<String, CensusDAO> censusDAOMap = indiaCensusAdapter.loadCensusData(INDIA_CENSUS_CSV_FILE_PATH,INDIA_STATE_CODE_CSV_FILE_PATH);
+        Map<String, CensusDAO> censusDAOMap = indiaCensusAdapter.loadCensusData(INDIA_CENSUS_CSV_FILE_PATH, INDIA_STATE_CODE_CSV_FILE_PATH);
         Assert.assertEquals(29, censusDAOMap.size());
     }
 
@@ -26,7 +26,7 @@ public class IndiaCensusAdapterTest {
     public void givenIndianCensusDataAndStateCodeData_WhenSequenceWrong_ShouldThrowException() {
         try {
             IndiaCensusAdapter indiaCensusAdapter = new IndiaCensusAdapter();
-            indiaCensusAdapter.loadCensusData(INDIA_STATE_CODE_CSV_FILE_PATH,INDIA_CENSUS_CSV_FILE_PATH);
+            indiaCensusAdapter.loadCensusData(INDIA_STATE_CODE_CSV_FILE_PATH, INDIA_CENSUS_CSV_FILE_PATH);
         } catch (CensusAnalyserException e) {
             Assert.assertEquals(CensusAnalyserException.ExceptionType.ERROR_FROM_CSV_BUILDER, e.type);
         }
@@ -105,7 +105,7 @@ public class IndiaCensusAdapterTest {
         try {
             IndiaCensusAdapter indiaCensusAdapter = new IndiaCensusAdapter();
             indiaCensusAdapter.loadCensusData(INDIA_CENSUS_CSV_FILE_PATH);
-        }catch (CensusAnalyserException e){
+        } catch (CensusAnalyserException e) {
             Assert.assertEquals(CensusAnalyserException.ExceptionType.SECOND_FILE_PATH_MISSING, e.type);
         }
     }
